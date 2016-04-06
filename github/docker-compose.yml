@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+  head:
+    container_name: head
+    image: gliderlabs/alpine
+    command: sleep 3000
+    depends_on:
+      - radio
+    networks:
+      - int
+      - ext
+  legs:
+    container_name: legs
+    image: gliderlabs/alpine
+    command: sleep 3000
+    depends_on:
+      - head
+    networks:
+      - int
+  arms:
+    container_name: arms
+    image: gliderlabs/alpine
+    command: sleep 3000
+    depends_on:
+      - head
+    networks:
+      - ext
+  weapon:
+    container_name: weapon
+    image: gliderlabs/alpine
+    command: sleep 3000
+    depends_on:
+      - head
+    networks:
+      - int
+  stockfish:
+    container_name: stockfish
+    image: gliderlabs/alpine
+    command: sleep 3000
+    depends_on:
+      - head
+    networks:
+      - int
+  radio:
+    container_name: radio
+    image: gliderlabs/alpine
+    command: sleep 3000
+    networks:
+      - ext
+networks:
+  ext:
+    driver: overlay
+  int:
+    driver: overlay
